@@ -88,17 +88,7 @@ parse.headers = function(t)
   local upper = function(str)
     return string.gsub(" " .. str, "%W%l", string.upper):sub(2)
   end
-  return util.kv_to_list(
-    (function()
-      local normilzed = {}
-      for k, v in pairs(t) do
-        normilzed[upper(k:gsub("_", "%-"))] = v
-      end
-      return normilzed
-    end)(),
-    "-H",
-    ": "
-  )
+  return util.kv_to_list(t, "-H", ": ")
 end
 
 parse.data_body = function(t)
